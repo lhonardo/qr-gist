@@ -1,21 +1,29 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import reducers from './src/reducers';
+import ReduxThunk from 'redux-thunk';
+import { Scene, Router, Actions, Stack } from 'react-native-router-flux';
+import Home from './src/components/Home';
+import Gist from './src/components/Gist';
 
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
+    const scenes = Actions.create(
+      <Scene key="root">
+        <Scene key="home" component={Home} title="Main page" />
+        <Scene key="gist" component={Gist} title="Access a gist repo" />
+      </Scene>
+    );
+
     return (
-      <View style={styles.container}>
-        <Text>Hello world!</Text>
-      </View>
+      <Provider store={store}>
+        <Router scenes={scenes}/>
+      </Provider>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
