@@ -5,7 +5,7 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  isLoading: false,
+  isFetching: false,
   errors: {},
   gist: {}
 };
@@ -27,7 +27,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isFetching: false,
-        errors: action.errors
+        errors: action.payload
       };
     default:
       return state;

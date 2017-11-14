@@ -1,15 +1,18 @@
 import React from 'react';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import reducers from './src/reducers';
 import ReduxThunk from 'redux-thunk';
+import { composeWithDevTools } from 'remote-redux-devtools';
 import { Scene, Router, Actions, Stack } from 'react-native-router-flux';
 import Home from './src/components/Home';
 import Gist from './src/components/Gist';
 
 class App extends React.Component {
   render() {
-    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+    const store = createStore(reducers, {}, composeWithDevTools(
+      applyMiddleware(ReduxThunk)
+    ));
 
     const scenes = Actions.create(
       <Scene key="root">

@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
-import { Actions } from 'react-native-router-flux';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { Actions } from 'react-native-router-flux'
+import { StyleSheet, Text, View } from 'react-native'
+import * as gistActions from '../actions/gistActions'
+
 // import { CardSection } from './common';
 
 class Gist extends Component {
@@ -8,12 +12,16 @@ class Gist extends Component {
   //   Actions.employeeEdit({ employee: this.props.employee });
   // }
 
+  componentWillMount() {
+    this.props.fetchGist(this.props.gistUrl)
+  }
+
   render() {
     // const { name } = this.props.employee;
 
     return (
       <View style={styles.container}>
-        <Text>Aqui é gist</Text>
+        <Text>Here's gist</Text>
       </View>
     );
   }
@@ -28,4 +36,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Gist;
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(gistActions, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(Gist)
