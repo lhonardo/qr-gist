@@ -1,5 +1,9 @@
 class ApiRequest {
 
+  constructor (token) {
+    this.token = token
+  }
+
   post (endpoint, params) {
     return fetch(endpoint, {
       method: 'POST',
@@ -36,6 +40,10 @@ class ApiRequest {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+    }
+
+    if (this.token) {
+      headers.Authorization = 'Basic ' + this.token
     }
 
     return headers

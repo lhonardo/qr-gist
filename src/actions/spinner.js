@@ -1,4 +1,4 @@
-import { SHOW_SPINNER, HIDE_SPINNER } from '../constants/actionTypes'
+import { SHOW_SPINNER, HIDE_SPINNER } from './types'
 
 export const showSpinner = () => {
   return { type: SHOW_SPINNER }

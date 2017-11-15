@@ -1,8 +1,9 @@
-export const API = 'https://api.github.com/gists/'
+export const API = 'https://api.github.com'
+
 
 export default {
   URL: API,
-  //
-  // // Access single Gist
-  // ACCESS_GIST: 'gists'
+
+  GISTS: `${API}/gists/`,
+  USER: `${API}/user`,
 }
